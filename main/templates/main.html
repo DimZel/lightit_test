@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% load tree %}
+{% load myfilters %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12" id="form_origin">
+            <form action="{% url 'addcomment' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.text.errors }}
+                <div class="col-md-10">
+                    <textarea class="form-control" placeholder="{{ form.text.label }}"
+                              id="id_{{ form.text.name }}" name="{{ form.text.name }}"
+                              rows="5" required></textarea>
+                </div>
+                <input type="hidden" name="parent" value="">
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                    <button type="button" class="btn btn-danger m-t-2" id="cancel_btn"
+                            style="display: none;">Отменить</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+    <div class="container m-t-3">
+        <div class="card">
+            <div class="card-header">Comments</div>
+            <div class="card-body">
+        <div class="treeview">
+            {% tree comments|astree:"parent" %}
+                <div class="row">
+                    <span class="date">({{ item.date }})</span>
+                    <span class="text">{{ item.text }}</span>
+                    <a href="#" class="comment" data-comment="{{ item.id }}">Ответить</a>
+                </div>
+            {% endtree %}
+        </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
