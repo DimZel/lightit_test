@@ -1,11 +1,43 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <!-- Put this div tag to the place, where Auth block will be -->
-    <div id="vk_auth"></div>
-    <script type="text/javascript">
-        VK.Widgets.Auth("vk_auth", {redesign: 1, width: "200px", onAuth: function(data) {
-         alert('user '+data['uid']+' authorized');
-        } });
-    </script>
+{#    <p style="margin: 0.4em;">#}
+{#    <a href="{% url 'social:begin' 'vk-oauth2' %}">Enter VK</a>#}
+{#</p>#}
+{#    <!-- Put this div tag to the place, where Auth block will be -->#}
+{#    <div id="vk_auth"></div>#}
+{#    <script type="text/javascript">#}
+{#        VK.Widgets.Auth("vk_auth", {redesign: 1, width: "200px", onAuth: function(data) {#}
+{#         alert('user '+data['uid']+' authorized');#}
+{#        } });#}
+{#    </script>#}
+    <div>
+        <h1>Third-party authentication demo</h1>
+
+        <p>
+            <ul>
+                {% if user and not user.is_anonymous %}
+                <li>
+                    <a>Hello {{ user.get_full_name|default:user.username }}!</a>
+                </li>
+                <li>
+                    <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'social:begin' 'vk' %}">Login with VK</a>
+                </li>
+                <li>
+                    <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+                </li>
+{#                <li>#}
+{#                    <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">Login with Google</a>#}
+{#                </li>#}
+{#                <li>#}
+{#                    <a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">Login with Twitter</a>#}
+{#                </li>#}
+                {% endif %}
+            </ul>
+        </p>
+    </div>
 {% endblock %}

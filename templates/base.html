@@ -16,10 +16,27 @@
     <script type="text/javascript" src="//vk.com/js/api/openapi.js?127"></script>
 
     <script type="text/javascript">
-      VK.init({apiId: 5617578});
+      VK.init({apiId: 5617782});
     </script>
 </head>
 <body>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '1163495830375917',
+          xfbml      : true,
+          version    : 'v2.7'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
     <div class="container">
     {% block content %}{% endblock %}
     </div>
