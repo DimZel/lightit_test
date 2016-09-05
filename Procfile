@@ -1,1 +1,1 @@
-web: gunicorn datawiz_test.wsgi --log-file -
+web: gunicorn lightit_test.wsgi --log-file -
