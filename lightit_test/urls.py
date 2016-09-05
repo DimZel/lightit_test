@@ -20,7 +20,7 @@ import main.views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^login/', login.views.login, name='login'),
+    url(r'^login/$', login.views.login, name='login'),
     url('', include('social.apps.django_app.urls', namespace='social')),
     url('', include('django.contrib.auth.urls', namespace='auth')),
     url(r'^', include('main.urls'))
