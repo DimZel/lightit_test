@@ -5,12 +5,13 @@
 {% block content %}
     <div class="row">
         {% if user and not user.is_anonymous %}
-        <li>
-            <a>Hello {{ user.get_full_name }}!</a>
-        </li>
-        <li>
-            <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
-        </li>
+        <div class="col-md-12">
+            <b>Вошли как: {{ user.get_full_name }}</b>
+            ( <a href="{% url 'auth:logout' %}?next={{ request.path }}"
+                   class="">Выйти</a> )
+        </div>
+    </div>
+    <div class="row">
         <!-- Form -->
         <div class="col-md-12" id="form_origin">
             <form action="{% url 'addcomment' %}" method="post">
@@ -33,15 +34,20 @@
         </div>
         {% else %}
         <!-- Login -->
-        Для выполнения комментирования выполните <a href="{% url 'login' %}">вход</a>!
+        <h3 class="text-md-center">
+            Для добавления и комментирования сообщений выполните <a href="{% url 'login' %}">вход</a>!
+        </h3>
         {% endif %}
     </div>
     <div class="row">
     <div class="container m-t-3">
         <div class="card">
-            <div class="card-header">Comments</div>
+            <div class="card-header">Сообщения</div>
             <div class="card-body">
+        <!-- Дерево комментариев -->
         <div class="treeview">
+        {# Если пользователь вошел, он может комментировать #}
+        {% if user and not user.is_anonymous %}
             {% tree comments|astree:"parent" %}
                 <div class="row">
                     <span class="date">({{ item.date }})</span>
@@ -49,6 +55,15 @@
                     <a href="#" class="comment" data-comment="{{ item.id }}">Ответить</a>
                 </div>
             {% endtree %}
+        {# Иначе, только просматривать #}
+        {% else %}
+            {% tree comments|astree:"parent" %}
+                <div class="row">
+                    <span class="date">({{ item.date }})</span>
+                    <span class="text">{{ item.text }}</span>
+                </div>
+            {% endtree %}
+        {% endif %}
         </div>
             </div>
         </div>

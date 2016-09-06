@@ -13,6 +13,9 @@ def astree(items, attribute):
     for item in items:
         parent_map[getattr(item, attribute)].append(item)
 
+    # сортировка сообщений в обратном порядке
+    parent_map[None] = parent_map[None][::-1]
+
     # рекурсивный вывод детей одного parent'а
     def tree_level(parent):
         for item in parent_map[parent]:

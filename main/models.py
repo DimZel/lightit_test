@@ -8,15 +8,5 @@ from django.db import models
 class Comment(models.Model):
     text = models.TextField(verbose_name='Текст сообщения')
     date = models.DateTimeField()
-    user = models.ForeignKey(to='User')
+    # user = models.ForeignKey(to='social.default.UserSocialAuth')
     parent = models.ForeignKey(to='self', blank=True, null=True)
-
-
-class User(models.Model):
-    name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
-
-    def __unicode__(self):
-        return self.name
