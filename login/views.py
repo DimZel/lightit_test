@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render, redirect
 
 
@@ -5,6 +6,5 @@ from django.shortcuts import render, redirect
 def login(request):
     if not request.user.is_anonymous():
         return redirect('main')
-    context = {'title': 'Login',
-               'user': request.user}
+    context = {'title': 'Вход'}
     return render(request, 'login.html', context)

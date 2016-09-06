@@ -1,8 +1,8 @@
 from django.forms import ModelForm
-from models import Comment
+from models import CommentTree
 
 
-class CommentForm(ModelForm):
+class CommentTreeForm(ModelForm):
     class Meta:
-        model = Comment
-        fields = ['text', 'parent']
+        model = CommentTree
+        fields = ['text', 'parent', 'id']

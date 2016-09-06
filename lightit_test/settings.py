@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'main',
     'login',
     'social.apps.django_app.default',
+    'mptt',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +56,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'lightit_test.urls'
@@ -131,7 +131,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Kiev'
 
 USE_I18N = True
 
@@ -142,10 +142,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-
-# STATIC_URL = '/static/'
-#
-# STATICFILES_DIRS = [STATIC_DIR, ]
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 

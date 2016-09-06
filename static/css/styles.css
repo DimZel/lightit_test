@@ -1,20 +1,27 @@
-/*
- * Base structure
- */
-
-/* Move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 50px;
 }
 
-/*
- * Top navigation
- * Hide default border to remove 1px line.
- */
-.navbar-fixed-top {
-    border: 0;
+textarea {
+    resize: none;
 }
 
-footer {
-    margin: 50px 0;
+a:not([href]):not([tabindex]) {
+    color: dodgerblue;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:not([href]):not([tabindex]):hover {
+    text-decoration: underline;
+}
+
+a:not([href]):not([tabindex]).edit {
+    color: #bc9c43;
+    text-decoration: none;
+}
+
+a.rm {
+    color: #a94442;
+    text-decoration: none;
 }

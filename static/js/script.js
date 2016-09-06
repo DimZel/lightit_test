@@ -17,3 +17,14 @@ $('#cancel_btn').click(function () {
     form.find('[name="parent"]').attr('value', '');
     $(this).hide();
 });
+
+$('.fa-edit').click(function () {
+    var form = $('form');
+    form.attr('action', 'edit_comment/');
+    $(this).parent().append(form);
+    var text = $(this).parent().children('.text').html();
+    form.find('textarea').val(text);
+    var comment_id = $(this).data('comment');
+    form.find('[name="id"]').attr('value', comment_id);
+    $('#cancel_btn').show();
+});

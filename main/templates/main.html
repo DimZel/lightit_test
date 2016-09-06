@@ -14,7 +14,7 @@
     <div class="row">
         <!-- Form -->
         <div class="col-md-12" id="form_origin">
-            <form action="{% url 'addcomment' %}" method="post">
+            <form action="{% url 'add_comment' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
                 {{ form.text.errors }}
@@ -23,6 +23,7 @@
                               id="id_{{ form.text.name }}" name="{{ form.text.name }}"
                               rows="5" required></textarea>
                 </div>
+                <input type="hidden" name="id" value="">
                 <input type="hidden" name="parent" value="">
                 <div class="col-md-2">
                     <button type="submit" class="btn btn-primary">Отправить</button>
@@ -42,29 +43,37 @@
     <div class="row">
     <div class="container m-t-3">
         <div class="card">
-            <div class="card-header">Сообщения</div>
+            <div class="card-header">
+                Сообщения
+                [ <a id="expand-all" data-expanded="0">Показать все</a> ]
+            </div>
             <div class="card-body">
-        <!-- Дерево комментариев -->
-        <div class="treeview">
-        {# Если пользователь вошел, он может комментировать #}
-        {% if user and not user.is_anonymous %}
-            {% tree comments|astree:"parent" %}
-                <div class="row">
-                    <span class="date">({{ item.date }})</span>
-                    <span class="text">{{ item.text }}</span>
-                    <a href="#" class="comment" data-comment="{{ item.id }}">Ответить</a>
-                </div>
-            {% endtree %}
-        {# Иначе, только просматривать #}
-        {% else %}
-            {% tree comments|astree:"parent" %}
-                <div class="row">
-                    <span class="date">({{ item.date }})</span>
-                    <span class="text">{{ item.text }}</span>
-                </div>
-            {% endtree %}
-        {% endif %}
-        </div>
+            {% load mptt_tags %}
+            <div class="treeview">
+                <ul>
+                    {% recursetree nodes %}
+                        <li>
+                            <div class="row">
+                                <span class="date">({{ node.date }})</span>
+                                <span class="text">{{ node.text }}</span>
+                                {% if user and not user.is_anonymous %}
+                                <a class="comment" data-comment="{{ node.id }}">Ответить</a>
+                                {% if user.id == node.user.id %}
+                                <a class="edit fa fa-edit" data-comment="{{ node.id }}"></a>
+                                <a class="rm fa fa-remove"
+                                href="{% url 'rm_comment' %}?id={{ node.id }}"></a>
+                                {% endif %}
+                                {% endif %}
+                            </div>
+                            {% if not node.is_leaf_node %}
+                                <ul class="children">
+                                    {{ children }}
+                                </ul>
+                            {% endif %}
+                        </li>
+                    {% endrecursetree %}
+                </ul>
+            </div>
             </div>
         </div>
     </div>
