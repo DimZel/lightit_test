@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from forms import CommentForm
 from datetime import datetime
 from models import Comment
+from django.utils import timezone
 # from social.apps.django_app.default.models import UserSocialAuth
 
 
@@ -19,7 +20,7 @@ def add_comment(request):
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.date = datetime.now()
+            comment.date = timezone.now()
             # comment.user = UserSocialAuth.objects.get(request.user)
             # comment.user = UserSocialAuth.objects.all()[0]
             form.save()

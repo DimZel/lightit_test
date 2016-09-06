@@ -96,7 +96,7 @@ DATABASES = {
 AUTHENTICATION_BACKENDS = [
     'social.backends.vk.VKOAuth2',
     # 'social.backends.facebook.FacebookOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
+    # 'django.contrib.auth.backends.ModelBackend',
 ]
 
 SOCIAL_AUTH_VK_OAUTH2_KEY = '5617782'
