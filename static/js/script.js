@@ -6,6 +6,7 @@
 $('.comment').click(function () {
     var form = $('form');
     form.attr('action', 'add_comment/');
+    form.find('textarea').val('');
     $(this).parent().append(form);
     var comment_id = $(this).data('comment');
     form.find('[name="parent"]').attr('value', comment_id);
@@ -27,7 +28,8 @@ $('.fa-edit').click(function () {
     var text = $(this).parent().children('.text').html();
     form.find('textarea').val(text);
     var comment_id = $(this).data('comment');
+    var parent_id = $(this).data('parent');
     form.find('[name="id"]').attr('value', comment_id);
-    form.find('[name="parent"]').attr('value', '');
+    form.find('[name="parent"]').attr('value', parent_id);
     $('#cancel_btn').show();
 });

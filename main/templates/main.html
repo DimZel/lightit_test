@@ -57,7 +57,8 @@
                                 {% if user and not user.is_anonymous %}
                                 <a class="comment" data-comment="{{ node.id }}">Ответить</a>
                                 {% if user.id == node.user.id %}
-                                <a class="edit fa fa-edit" data-comment="{{ node.id }}"></a>
+                                <a class="edit fa fa-edit" data-comment="{{ node.id }}"
+                                data-parent="{{ node.parent.id }}"></a>
                                 <a class="rm fa fa-remove"
                                 href="{% url 'rm_comment' %}?id={{ node.id }}"></a>
                                 {% endif %}
